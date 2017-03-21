@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>检测用户名是否被占用</title>
+<link rel="stylesheet" type="text/css" href="css/public.css">
+<link rel="stylesheet" type="text/css" href="css/reg.css">
+<script type="text/javascript" src="js/addEvent.js"></script>
+<script type="text/javascript" src='js/ajax.js'></script>
+<script type="text/javascript">
+	addEvent(window,"load",function(){
+		var userName=document.getElementById("userName");
+		var tips=document.getElementById("tips");
+		addEvent(userName,"blur",function(){
+			var data="userName="+userName.value;
+			ajax("POST","reg.php",function(data){
+                   if(data==1){
+                   	tips.innerHTML="用户名已经被占用";
+                   }
+			},data)
+		})
+		addEvent(userName,"focus",function(){
+			tips.innerHTML="";
+		})
+	})
+</script>
+</head>
+
+<body>
+<input type="text" name="" id="userName"><span id="tips"></span>
+</body>
+</html>
